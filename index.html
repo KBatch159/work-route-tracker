@@ -31,19 +31,23 @@
     }
 
     /* Timer - bottom-centre */
+        /* Timer - bottom-centre */
     #timer {
         position: absolute;
-        bottom: 20px; /* Slight gap above the screen bottom */
+        bottom: 20px; /* Slight gap above the bottom */
         left: 50%;
-        transform: translateX(-50%); /* Centre horizontally */
+        transform: translateX(-50%);
         z-index: 1000;
-        font-size: 18px;
-        background: rgba(0, 0, 0, 0.7); /* Dark transparent background */
+        font-size: 16px;
+        background: rgba(0, 0, 0, 0.5); /* Less opaque background */
         color: white;
-        padding: 10px 15px;
+        padding: 8px 12px;
         border-radius: 8px;
         text-align: center;
+        width: auto; /* Automatically sizes to content */
+        max-width: 90%; /* Ensure it doesn’t overflow on small screens */
     }
+
 </style>
 
 </head>
