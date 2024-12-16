@@ -3,52 +3,52 @@ let liveMarker; // Live location marker
 let intervalId; // Timer interval
 let startTime; // Track the start time
 
+// Event listeners for Home and Work buttons
 document.getElementById("homeButton").addEventListener("click", () => startTracking("Home"));
 document.getElementById("workButton").addEventListener("click", () => startTracking("Work"));
 
-function initMap() {
-    // Initialise the map without centring
-    map = L.map('map', { zoomControl: true });
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-}
-
 function startTracking(destination) {
-    // Hide welcome screen and show the map and timer
+    // Hide the welcome screen
     document.getElementById("welcome-screen").style.display = "none";
     document.getElementById("map").style.display = "block";
     document.getElementById("timer").style.display = "block";
 
-    // Centre map on current location
+    // Initialise the map if not already created
+    if (!map) {
+        map = L.map('map');
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+    }
+
+    // Centre the map on the current location
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
             const { latitude, longitude } = position.coords;
-            map.setView([latitude, longitude], 15);
 
-            // Add live marker
+            // Set map view and add live marker
+            map.setView([latitude, longitude], 15);
             liveMarker = L.circleMarker([latitude, longitude], {
                 radius: 10,
                 color: "red"
             }).addTo(map);
 
-            // Start updating position
+            // Start updating position and timer
             startUpdatingPosition();
             startTimer();
+
+            alert(`Tracking started for ${destination}`);
         }, handleError, { enableHighAccuracy: true });
     } else {
-        alert("Geolocation not supported.");
+        alert("Geolocation is not supported by this browser.");
     }
-
-    alert(`Tracking started for ${destination}`);
 }
 
 function startUpdatingPosition() {
+    // Update live position marker without resetting the map
     navigator.geolocation.watchPosition(position => {
         const { latitude, longitude } = position.coords;
-
-        // Update live marker without resetting the map view
-        liveMarker.setLatLng([latitude, longitude]);
+        if (liveMarker) liveMarker.setLatLng([latitude, longitude]);
     }, handleError, { enableHighAccuracy: true });
 }
 
@@ -68,7 +68,5 @@ function startTimer() {
 
 function handleError(error) {
     console.error("Error fetching location:", error);
+    alert("Unable to retrieve location. Please check your GPS settings.");
 }
-
-// Initialise map on page load
-window.onload = initMap;
