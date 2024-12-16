@@ -8,10 +8,30 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        body, html { margin: 0; padding: 0; }
-        #map { height: 100vh; }
-        button { position: absolute; top: 10px; left: 10px; z-index: 1000; padding: 10px; }
-    </style>
+    body, html { margin: 0; padding: 0; }
+    #map { height: 100vh; }
+    
+    /* Make button and timer appear above zoom controls */
+    #startButton {
+        position: absolute;
+        top: 10px;
+        left: 50px; /* Adjusted to the right of zoom buttons */
+        z-index: 1000;
+        font-size: 20px;
+        padding: 15px;
+    }
+
+    #timer {
+        position: absolute;
+        top: 70px; /* Below the button */
+        left: 50px; /* Align with button */
+        font-size: 18px;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+</style>
 </head>
 <body>
     <button id="startButton" style="font-size: 20px; padding: 15px;">Start Tracking</button>
