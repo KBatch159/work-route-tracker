@@ -11,27 +11,41 @@
     body, html { margin: 0; padding: 0; }
     #map { height: 100vh; }
     
-    /* Make button and timer appear above zoom controls */
+    /* Start Tracking button - top-right */
     #startButton {
         position: absolute;
         top: 10px;
-        left: 50px; /* Adjusted to the right of zoom buttons */
+        right: 10px; /* Top-right corner */
         z-index: 1000;
         font-size: 20px;
         padding: 15px;
+        background: rgba(0, 122, 255, 0.9); /* iOS-style blue */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
     }
 
+    #startButton:active {
+        background: rgba(0, 122, 255, 1);
+    }
+
+    /* Timer - bottom-centre */
     #timer {
         position: absolute;
-        top: 70px; /* Below the button */
-        left: 50px; /* Align with button */
-        font-size: 18px;
+        bottom: 20px; /* Slight gap above the screen bottom */
+        left: 50%;
+        transform: translateX(-50%); /* Centre horizontally */
         z-index: 1000;
-        background: rgba(255, 255, 255, 0.8);
-        padding: 5px 10px;
-        border-radius: 5px;
+        font-size: 18px;
+        background: rgba(0, 0, 0, 0.7); /* Dark transparent background */
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        text-align: center;
     }
 </style>
+
 </head>
 <body>
     <button id="startButton" style="font-size: 20px; padding: 15px;">Start Tracking</button>
