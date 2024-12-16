@@ -4,57 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Work Route Tracker</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-    body, html { margin: 0; padding: 0; }
-    #map { height: 100vh; }
-    
-    /* Start Tracking button - top-right */
-    #startButton {
-        position: absolute;
-        top: 10px;
-        right: 10px; /* Top-right corner */
-        z-index: 1000;
-        font-size: 20px;
-        padding: 15px;
-        background: rgba(0, 122, 255, 0.9); /* iOS-style blue */
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    #startButton:active {
-        background: rgba(0, 122, 255, 1);
-    }
-
-    /* Timer - bottom-centre */
-        /* Timer - bottom-centre */
-    #timer {
-        position: absolute;
-        bottom: 20px; /* Slight gap above the bottom */
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1000;
-        font-size: 16px;
-        background: rgba(0, 0, 0, 0.5); /* Less opaque background */
-        color: white;
-        padding: 8px 12px;
-        border-radius: 8px;
-        text-align: center;
-        width: auto; /* Automatically sizes to content */
-        max-width: 90%; /* Ensure it doesn’t overflow on small screens */
-    }
-
-</style>
-
+        body, html { margin: 0; padding: 0; height: 100%; }
+        #welcome-screen {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background-color: white;
+            z-index: 1000;
+        }
+        #welcome-screen h1 { margin-bottom: 20px; font-size: 24px; }
+        .route-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            margin: 10px;
+            border: none;
+            background-color: #007AFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #map { height: 100%; display: none; }
+        #timer {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            font-size: 16px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <button id="startButton" style="font-size: 20px; padding: 15px;">Start Tracking</button>
-    <div id="timer" style="position: absolute; top: 60px; left: 10px; font-size: 18px; z-index: 1000;">Time: 0m 0s</div>
+    <!-- Welcome Screen -->
+    <div id="welcome-screen">
+        <h1>Where to?</h1>
+        <button class="route-button" id="homeButton">Home</button>
+        <button class="route-button" id="workButton">Work</button>
+    </div>
+    <!-- Map -->
     <div id="map"></div>
+    <!-- Timer -->
+    <div id="timer" style="display: none;">Time: 0m 0s</div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
